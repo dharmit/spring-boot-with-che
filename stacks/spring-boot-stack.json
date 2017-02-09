@@ -1,0 +1,74 @@
+{
+  "id": "spring-boot",
+  "creator": "Gytis Trikleris",
+  "name": "Spring Boot",
+  "description": "Spring Boot on CentOS",
+  "scope": "advanced",
+  "tags": [
+    "Java",
+    "JDK",
+    "Maven",
+    "Spring Boot",
+    "CentOS",
+    "Git"
+  ],
+  "components": [
+    {
+      "name": "JDK",
+      "version": "1.8.0_45"
+    },
+    {
+      "name": "Maven",
+      "version": "3.2.2"
+    }
+  ],
+  "source": {
+    "type": "image",
+    "origin": "gytis/centos_spring_boot"
+  },
+  "workspaceConfig": {
+    "environments": {
+      "default": {
+        "machines": {
+          "dev-machine": {
+            "agents": [
+              "org.eclipse.che.terminal",
+              "org.eclipse.che.ws-agent",
+              "org.eclipse.che.ssh"
+            ],
+            "servers": {},
+            "attributes": {
+              "memoryLimitBytes": "2147483648"
+            },
+            "recipe": {
+              "location": "gytis/centos_spring_boot",
+              "type": "dockerimage"
+            }
+          }
+        },
+        "name": "default",
+        "defaultEnv": "default",
+        "description": null,
+        "commands": [
+          {
+            "commandLine": "mvn clean install -f ${current.project.path}",
+            "name": "build",
+            "type": "mvn"
+          },
+          {
+            "commandLine": "java -jar target/*.jar",
+            "name": "run",
+            "type": "custom",
+            "attributes": {
+              "previewUrl": "http://${server.port.8080}"
+            }
+          }
+        ]
+      },
+      "stackIcon": {
+        "name": "type-java.svg",
+        "mediaType": "image/svg+xml"
+      }
+    }
+  }
+}
