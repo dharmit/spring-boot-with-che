@@ -1,8 +1,9 @@
 {
-  "id": "spring-boot",
-  "creator": "Gytis Trikleris",
-  "name": "Spring Boot",
-  "description": "Spring Boot on CentOS",
+  "description": "Spring Boot Stack on CentOS.",
+  "source": {
+    "origin": "gytis/centos_spring_boot",
+    "type": "image"
+  },
   "scope": "advanced",
   "tags": [
     "Java",
@@ -12,63 +13,64 @@
     "CentOS",
     "Git"
   ],
-  "components": [
-    {
-      "name": "JDK",
-      "version": "1.8.0_45"
-    },
-    {
-      "name": "Maven",
-      "version": "3.2.2"
-    }
-  ],
-  "source": {
-    "type": "image",
-    "origin": "gytis/centos_spring_boot"
-  },
+  "creator": "Gytis Trikleris",
   "workspaceConfig": {
     "environments": {
       "default": {
+        "recipe": {
+          "location": "gytis/centos_spring_boot",
+          "type": "dockerimage"
+        },
         "machines": {
           "dev-machine": {
+            "servers": {},
             "agents": [
               "org.eclipse.che.terminal",
               "org.eclipse.che.ws-agent",
               "org.eclipse.che.ssh"
             ],
-            "servers": {},
             "attributes": {
               "memoryLimitBytes": "2147483648"
-            },
-            "recipe": {
-              "location": "gytis/centos_spring_boot",
-              "type": "dockerimage"
             }
           }
-        },
-        "name": "default",
-        "defaultEnv": "default",
-        "description": null,
-        "commands": [
-          {
-            "commandLine": "mvn clean install -f ${current.project.path}",
-            "name": "build",
-            "type": "mvn"
-          },
-          {
-            "commandLine": "java -jar target/*.jar",
-            "name": "run",
-            "type": "custom",
-            "attributes": {
-              "previewUrl": "http://${server.port.8080}"
-            }
-          }
-        ]
-      },
-      "stackIcon": {
-        "name": "type-java.svg",
-        "mediaType": "image/svg+xml"
+        }
       }
+    },
+    "defaultEnv": "default",
+    "commands": [
+      {
+        "commandLine": "scl enable rh-maven33 'mvn clean install -f ${current.project.path}'",
+        "name": "build",
+        "type": "mvn",
+        "attributes": {}
+      },
+      {
+        "commandLine": "cd ${current.project.path} && scl enable rh-maven33 'java -jar target/*.jar'",
+        "name": "run",
+        "type": "custom",
+        "attributes": {
+          "previewUrl": "http://${server.port.8080}"
+        }
+      }
+    ],
+    "projects": [],
+    "name": "default",
+    "links": []
+  },
+  "components": [
+    {
+      "version": "---",
+      "name": "CentOS"
+    },
+    {
+      "version": "1.8.0_45",
+      "name": "JDK"
+    },
+    {
+      "version": "3.2.2",
+      "name": "Maven"
     }
-  }
+  ],
+  "name": "Spring Boot",
+  "id": "spring-boot"
 }
