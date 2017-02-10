@@ -1,9 +1,8 @@
 {
+  "id": "spring-boot",
+  "creator": "Gytis Trikleris",
+  "name": "Spring Boot",
   "description": "Spring Boot Stack on CentOS.",
-  "source": {
-    "origin": "gytis/centos_spring_boot",
-    "type": "image"
-  },
   "scope": "advanced",
   "tags": [
     "Java",
@@ -13,8 +12,27 @@
     "CentOS",
     "Git"
   ],
-  "creator": "Gytis Trikleris",
+  "components": [
+    {
+      "name": "CentOS",
+      "version": "---"
+    },
+    {
+      "name": "JDK",
+      "version": "1.8.0_45"
+    },
+    {
+      "name": "Maven",
+      "version": "3.2.2"
+    }
+  ],
+  "source": {
+    "origin": "gytis/centos_spring_boot",
+    "type": "image"
+  },
   "workspaceConfig": {
+    "name": "default",
+    "defaultEnv": "default",
     "environments": {
       "default": {
         "recipe": {
@@ -23,7 +41,6 @@
         },
         "machines": {
           "dev-machine": {
-            "servers": {},
             "agents": [
               "org.eclipse.che.terminal",
               "org.eclipse.che.ws-agent",
@@ -36,41 +53,24 @@
         }
       }
     },
-    "defaultEnv": "default",
     "commands": [
       {
         "commandLine": "scl enable rh-maven33 'mvn clean install -f ${current.project.path}'",
         "name": "build",
-        "type": "mvn",
-        "attributes": {}
+        "type": "custom"
       },
       {
-        "commandLine": "cd ${current.project.path} && java -jar target/*.jar",
+        "commandLine": "java -jar ${current.project.path}/target/*.jar",
         "name": "run",
         "type": "custom",
         "attributes": {
           "previewUrl": "http://${server.port.8080}"
         }
       }
-    ],
-    "projects": [],
-    "name": "default",
-    "links": []
+    ]
   },
-  "components": [
-    {
-      "version": "---",
-      "name": "CentOS"
-    },
-    {
-      "version": "1.8.0_45",
-      "name": "JDK"
-    },
-    {
-      "version": "3.2.2",
-      "name": "Maven"
-    }
-  ],
-  "name": "Spring Boot",
-  "id": "spring-boot"
+  "stackIcon": {
+    "name": "type-java.svg",
+    "mediaType": "image/svg+xml"
+  }
 }

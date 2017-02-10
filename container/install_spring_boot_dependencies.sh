@@ -6,7 +6,6 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 
 function install {
-  #echo -e "${BLUE}Installing $1 ${NC}"
   mvn dependency:get -Dartifact=$1 > /tmp/maven-$1.log
   if [ $? -eq 0 ]; then
     echo -e "🍻  ${YELLOW}$1 installed successfully ${NC}"
