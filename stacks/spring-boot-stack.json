@@ -39,13 +39,13 @@
     "defaultEnv": "default",
     "commands": [
       {
-        "commandLine": "scl enable rh-maven33 && mvn clean install -f ${current.project.path}",
+        "commandLine": "scl enable rh-maven33 'mvn clean install -f ${current.project.path}'",
         "name": "build",
         "type": "mvn",
         "attributes": {}
       },
       {
-        "commandLine": "cd ${current.project.path} && scl enable rh-maven33 && java -jar target/*.jar",
+        "commandLine": "cd ${current.project.path} && java -jar target/*.jar",
         "name": "run",
         "type": "custom",
         "attributes": {
