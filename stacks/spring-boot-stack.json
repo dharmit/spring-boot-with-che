@@ -3,7 +3,7 @@
   "creator": "Gytis Trikleris",
   "name": "Spring Boot",
   "description": "Spring Boot Stack on CentOS.",
-  "scope": "advanced",
+  "scope": "general",
   "tags": [
     "Java",
     "JDK",
@@ -27,7 +27,7 @@
     }
   ],
   "source": {
-    "origin": "gytis/centos_spring_boot",
+    "origin": "registry.centos.org/che-stacks/springboot",
     "type": "image"
   },
   "workspaceConfig": {
@@ -36,7 +36,7 @@
     "environments": {
       "default": {
         "recipe": {
-          "location": "gytis/centos_spring_boot",
+          "location": "registry.centos.org/che-stacks/springboot",
           "type": "dockerimage"
         },
         "machines": {
