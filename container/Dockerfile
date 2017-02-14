@@ -1,3 +1,9 @@
+# Copyright (c) 2012-2017 Red Hat, Inc
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+
 FROM registry.centos.org/centos/centos
 
 MAINTAINER Gytis Trikleris
@@ -19,9 +25,6 @@ RUN yum -y update && \
     usermod -p "*" user
 
 COPY install_spring_boot_dependencies.sh /tmp/
-
-RUN chown user:user /tmp/install_spring_boot_dependencies.sh && \
-    chmod a+x /tmp/install_spring_boot_dependencies.sh
 
 USER user
 
